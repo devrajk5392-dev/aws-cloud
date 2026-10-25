@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Selection</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: lightblue;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            max-width: 300px;
+            margin: 50px auto;
+            border-radius: 10px;
+        }
+
+        input {
+            margin: 8px;
+        }
+
+        button {
+            background: blue;
+            color: white;
+            padding: 8px;
+        }
+
+        #result {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<form onsubmit="showResult(event)">
+    <h2>Course Selection</h2>
+
+    Name:
+    <input type="text" id="name" required><br>
+
+    Roll Number:
+    <input type="text" id="roll" required><br>
+
+    <p>Select Courses:</p>
+
+    <input type="checkbox" name="course" value="HTML"> HTML<br>
+    <input type="checkbox" name="course" value="CSS"> CSS<br>
+    <input type="checkbox" name="course" value="JavaScript"> JavaScript<br>
+    <input type="checkbox" name="course" value="Python"> Python<br><br>
+
+    <button type="submit">Submit</button>
+
+    <div id="result"></div>
+</form>
+
+<script>
+    function showResult(event) {
+        event.preventDefault();
+
+        let name = document.getElementById("name").value;
+        let roll = document.getElementById("roll").value;
+
+        let courses = document.querySelectorAll(
+            'input[name="course"]:checked'
+        );
+
+        if (courses.length == 0) {
+            alert("Select at least one course!");
+            return;
+        }
+
+        let selected = [];
+
+        courses.forEach(function(course) {
+            selected.push(course.value);
+        });
+
+        document.getElementById("result").innerHTML =
+            "Name: " + name + "<br>" +
+            "Roll Number: " + roll + "<br>" +
+            "Courses: " + selected.join(", ");
+    }
+</script>
+
+</body>
+</html>
